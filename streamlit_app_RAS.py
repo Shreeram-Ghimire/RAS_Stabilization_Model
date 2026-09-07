@@ -37,7 +37,6 @@ st.sidebar.markdown("---")
 st.title("RAS Stabilization Prediction Model")
 st.caption("Monod-kinetics biofilter cycling model with Monte Carlo uncertainty "
            "and Jacobian stability analysis.")
-st.caption("**Created by Shreeram Ghimire | © 2026 All Rights Reserved**")
 
 # ------------------------------------------------------------------
 # SIDEBAR — base conditions (mirrors the BaseConditions dataclass)
