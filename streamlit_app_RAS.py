@@ -173,8 +173,8 @@ def create_dashboard_download(sol, t_stab, stable, eigvals, base_params, fig):
             <h1>🐟 RAS Stabilization Model - Dashboard</h1>
             
             <div class="creator-info">
-                <strong>👨‍🔬 Created by:</strong> Shreeram Ghimire<br>
-                <strong>📅 Generated on:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}<br>
+                <strong> Created by:</strong> Shreeram Ghimire<br>
+                <strong> Generated on:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}<br>
                 <strong>© Copyright:</strong> 2026 Shreeram Ghimire. All Rights Reserved.
             </div>
             
@@ -295,7 +295,7 @@ with tab1:
         st.write(eigvals)
 
     st.markdown("---")
-    st.subheader("📊 Download Results")
+    st.subheader("Download Results")
     st.caption("All downloads include creator attribution and copyright information.")
     
     col1_download, col2_download = st.columns(2)
@@ -355,7 +355,7 @@ with tab2:
             
             
             st.markdown("---")
-            st.subheader("📊 Download Monte Carlo Results")
+            st.subheader(" Download Monte Carlo Results")
             st.caption("All downloads include creator attribution and copyright information.")
             
             # Create Monte Carlo data DataFrame
@@ -433,7 +433,7 @@ with tab2:
                 st.caption("Download histogram as PNG image")
             
             # Additional CSV download option
-            with st.expander("📄 Additional Download Options"):
+            with st.expander(" Additional Download Options"):
                 # Add creator info as comments in CSV
                 csv_data = mc_data.to_csv(index=False).encode('utf-8')
                 csv_link = get_download_link(csv_data, f"RAS_montecarlo_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv", "text/csv")
@@ -453,7 +453,7 @@ with col_footer2:
     st.markdown("""
     <div style='text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;'>
         <p style='font-size: 14px; color: #666;'>
-            <strong>👨‍🔬 Created by Shreeram Ghimire</strong><br>
+            <strong> Created by Shreeram Ghimire</strong><br>
             <span style='font-size: 12px;'>© 2026 Shreeram Ghimire. All Rights Reserved.</span><br>
             <span style='font-size: 11px; color: #999;'>This software and its output are protected by copyright law.</span>
         </p>
