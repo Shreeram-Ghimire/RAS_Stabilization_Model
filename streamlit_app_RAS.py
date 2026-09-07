@@ -309,9 +309,7 @@ with tab1:
 
 with tab2:
     st.write("Runs the model repeatedly, randomizing NH3_0, temperature, "
-             "mu_max_AOB/NOB, and DO around the sidebar values (std devs are "
-             "fixed in `ras_stabilization_model.PARAM_DISTRIBUTIONS` — edit "
-             "that dict to change spread).")
+             "mu_max_AOB/NOB, and DO around the sidebar values")
     n_runs = st.slider("Number of Monte Carlo runs", 20, 1000, 200, 20)
     run_button = st.button("Run Monte Carlo simulation")
 
