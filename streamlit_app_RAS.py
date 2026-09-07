@@ -288,7 +288,7 @@ with tab1:
 
     st.markdown("---")
     st.subheader("Download Results")
-    st.caption("All downloads include creator attribution and copyright information.")
+
     
     col1_download, col2_download = st.columns(2)
     
@@ -348,7 +348,6 @@ with tab2:
             
             st.markdown("---")
             st.subheader(" Download Monte Carlo Results")
-            st.caption("All downloads include creator attribution and copyright information.")
             
             # Create Monte Carlo data DataFrame
             mc_data = pd.DataFrame({
