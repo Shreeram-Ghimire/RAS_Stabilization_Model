@@ -104,7 +104,7 @@ def create_excel_download(sol, t_stab, stable, eigvals, base_params):
     base_df = pd.DataFrame({
         "Parameter": list(base_params.__dict__.keys()),
         "Value": list(base_params.__dict__.values()),
-        "Shreeram Ghimire":,
+        "Shreeram Ghimire:",
         "© 2026 Shreeram Ghimire. All Rights Reserved."
     })
     
