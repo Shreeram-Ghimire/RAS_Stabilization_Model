@@ -103,9 +103,9 @@ def create_excel_download(sol, t_stab, stable, eigvals, base_params):
     # Create base conditions DataFrame
     base_df = pd.DataFrame({
         "Parameter": list(base_params.__dict__.keys()),
-        "Value": list(base_params.__dict__.values())
+        "Value": list(base_params.__dict__.values()),
         "Shreeram Ghimire",
-        "© 2026 Shreeram Ghimire. All Rights Reserved."]
+        "© 2026 Shreeram Ghimire. All Rights Reserved."
     })
     
     # Write to Excel in memory
