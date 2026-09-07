@@ -169,7 +169,7 @@ def create_dashboard_download(sol, t_stab, stable, eigvals, base_params, fig):
     </head>
     <body>
         <div class="container">
-            <h1>🐟 RAS Stabilization Model - Dashboard</h1>
+            <h1> RAS Stabilization Model - Dashboard</h1>
             
             <div class="creator-info">
                 <strong> Created by:</strong> Shreeram Ghimire<br>
