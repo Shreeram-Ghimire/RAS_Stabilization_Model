@@ -21,7 +21,7 @@ from ras_stabilization_model import (
 )
 
 st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
-st.title("🐟 RAS Stabilization Prediction Model")
+st.title("RAS Stabilization Prediction Model")
 st.caption("Monod-kinetics biofilter cycling model with Monte Carlo uncertainty "
            "and Jacobian stability analysis.")
 
