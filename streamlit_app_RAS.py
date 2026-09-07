@@ -89,23 +89,31 @@ def create_excel_download(sol, t_stab, stable, eigvals, base_params):
     
     df = pd.DataFrame(data_dict)
     
-    # Create metadata DataFrame
+    # Create metadata DataFrame with creator info
     metadata = {
-        "Parameter": ["Stabilization Time (days)", "Stable at Final State", 
-                      "Max Eigenvalue (Real Part)", "Simulation Date"],
-        "Value": [t_stab if not np.isnan(t_stab) else "Not reached", 
-                  "Yes" if stable else "No",
-                  f"{eigvals.real.max():.6f}",
-                  datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+        "Parameter": [
+            "Stabilization Time (days)", 
+            "Stable at Final State", 
+            "Max Eigenvalue (Real Part)", 
+            "Simulation Date",
+            "Creator", 
+            "Copyright"
+        ],
+        "Value": [
+            t_stab if not np.isnan(t_stab) else "Not reached", 
+            "Yes" if stable else "No",
+            f"{eigvals.real.max():.6f}",
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Shreeram Ghimire",
+            "© 2026 Shreeram Ghimire. All Rights Reserved."
+        ]
     }
     metadata_df = pd.DataFrame(metadata)
     
     # Create base conditions DataFrame
     base_df = pd.DataFrame({
         "Parameter": list(base_params.__dict__.keys()),
-        "Value": list(base_params.__dict__.values()),
-        "Shreeram Ghimire:",
-        "© 2026 Shreeram Ghimire. All Rights Reserved."
+        "Value": list(base_params.__dict__.values())
     })
     
     # Write to Excel in memory
@@ -114,6 +122,22 @@ def create_excel_download(sol, t_stab, stable, eigvals, base_params):
         df.to_excel(writer, sheet_name='Simulation Data', index=False)
         metadata_df.to_excel(writer, sheet_name='Summary', index=False)
         base_df.to_excel(writer, sheet_name='Parameters', index=False)
+        
+        # Add a copyright notice sheet
+        copyright_df = pd.DataFrame({
+            "Information": [
+                "RAS Stabilization Prediction Model",
+                "Created by: Shreeram Ghimire",
+                "Copyright © 2026 Shreeram Ghimire",
+                "All Rights Reserved",
+                "",
+                "This software and its output are protected by copyright law.",
+                "Unauthorized reproduction or distribution is prohibited.",
+                "",
+                "For inquiries, please contact the creator."
+            ]
+        })
+        copyright_df.to_excel(writer, sheet_name='Copyright Notice', index=False, header=False)
     
     return output.getvalue()
 
@@ -149,8 +173,8 @@ def create_dashboard_download(sol, t_stab, stable, eigvals, base_params, fig):
             <h1>🐟 RAS Stabilization Model - Dashboard</h1>
             
             <div class="creator-info">
-                <strong> Created by:</strong> Shreeram Ghimire<br>
-                <strong> Generated on:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}<br>
+                <strong>👨‍🔬 Created by:</strong> Shreeram Ghimire<br>
+                <strong>📅 Generated on:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}<br>
                 <strong>© Copyright:</strong> 2026 Shreeram Ghimire. All Rights Reserved.
             </div>
             
@@ -270,6 +294,27 @@ with tab1:
     with st.expander("Eigenvalues (Jacobian at final state)"):
         st.write(eigvals)
 
+t.markdown("---")
+    st.subheader("📊 Download Results")
+    st.caption("All downloads include creator attribution and copyright information.")
+    
+    col1_download, col2_download = st.columns(2)
+    
+    with col1_download:
+        # Excel download
+        excel_data = create_excel_download(sol, t_stab, stable, eigvals, base)
+        excel_link = get_download_link(excel_data, f"RAS_simulation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        st.markdown(excel_link, unsafe_allow_html=True)
+        st.caption("Download simulation data and parameters as Excel file")
+    
+    with col2_download:
+        # HTML Dashboard download
+        html_content = create_dashboard_download(sol, t_stab, stable, eigvals, base, fig)
+        html_data = html_content.encode('utf-8')
+        html_link = get_download_link(html_data, f"RAS_dashboard_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html", "text/html")
+        st.markdown(html_link, unsafe_allow_html=True)
+        st.caption("Download interactive dashboard (HTML file)")
+
 with tab2:
     st.write("Runs the model repeatedly, randomizing NH3_0, temperature, "
              "mu_max_AOB/NOB, and DO around the sidebar values (std devs are "
@@ -298,10 +343,119 @@ with tab2:
             ax2.set_xlabel("Stabilization time (days)")
             ax2.set_ylabel("Number of simulations")
             ax2.set_title("Distribution of predicted stabilization time")
+            
+            # Add creator info to the histogram
+            plt.figtext(0.02, 0.02, f"Created by Shreeram Ghimire © 2026", 
+                        fontsize=8, color='gray', alpha=0.7)
+            
             st.pyplot(fig2)
 
             p5, p50, p95 = np.percentile(valid, [5, 50, 95])
             st.write(f"**Median:** {p50:.1f} days  |  **90% range:** {p5:.1f}–{p95:.1f} days")
+            
+            
+            st.markdown("---")
+            st.subheader("📊 Download Monte Carlo Results")
+            st.caption("All downloads include creator attribution and copyright information.")
+            
+            # Create Monte Carlo data DataFrame
+            mc_data = pd.DataFrame({
+                'Stabilization_Time (days)': times,
+                'Stable_at_Final': flags.astype(bool)
+            })
+            
+            # Add statistics with creator info
+            stats_df = pd.DataFrame({
+                'Statistic': [
+                    'Number of Runs', 
+                    'Stabilized Count', 
+                    'Stabilized Fraction',
+                    'Mean Stabilization Time', 
+                    'Median Stabilization Time',
+                    '5th Percentile', 
+                    '95th Percentile', 
+                    'Min Time', 
+                    'Max Time',
+                    'Creator', 
+                    'Copyright'
+                ],
+                'Value': [
+                    n_runs, 
+                    len(valid), 
+                    len(valid)/n_runs,
+                    valid.mean() if len(valid) > 0 else np.nan,
+                    np.percentile(valid, 50) if len(valid) > 0 else np.nan,
+                    np.percentile(valid, 5) if len(valid) > 0 else np.nan,
+                    np.percentile(valid, 95) if len(valid) > 0 else np.nan,
+                    valid.min() if len(valid) > 0 else np.nan,
+                    valid.max() if len(valid) > 0 else np.nan,
+                    'Shreeram Ghimire',
+                    '© 2026 Shreeram Ghimire. All Rights Reserved.'
+                ]
+            })
+            
+            col1_mc, col2_mc = st.columns(2)
+            
+            with col1_mc:
+                # Excel download for Monte Carlo
+                mc_excel_output = io.BytesIO()
+                with pd.ExcelWriter(mc_excel_output, engine='openpyxl') as writer:
+                    mc_data.to_excel(writer, sheet_name='Monte Carlo Data', index=False)
+                    stats_df.to_excel(writer, sheet_name='Statistics', index=False)
+                    
+                    # Add copyright notice sheet
+                    copyright_df = pd.DataFrame({
+                        "Information": [
+                            "RAS Stabilization Prediction Model - Monte Carlo Results",
+                            "Created by: Shreeram Ghimire",
+                            "Copyright © 2026 Shreeram Ghimire",
+                            "All Rights Reserved",
+                            "",
+                            "This software and its output are protected by copyright law.",
+                            "Unauthorized reproduction or distribution is prohibited."
+                        ]
+                    })
+                    copyright_df.to_excel(writer, sheet_name='Copyright Notice', index=False, header=False)
+                    
+                mc_excel_data = mc_excel_output.getvalue()
+                mc_excel_link = get_download_link(mc_excel_data, f"RAS_montecarlo_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                st.markdown(mc_excel_link, unsafe_allow_html=True)
+                st.caption("Download Monte Carlo data and statistics as Excel file")
+            
+            with col2_mc:
+                # Save histogram as PNG for download
+                fig_buffer = io.BytesIO()
+                fig2.savefig(fig_buffer, format='png', dpi=150, bbox_inches='tight')
+                fig_buffer.seek(0)
+                fig_png = fig_buffer.getvalue()
+                fig_link = get_download_link(fig_png, f"RAS_histogram_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png", "image/png")
+                st.markdown(fig_link, unsafe_allow_html=True)
+                st.caption("Download histogram as PNG image")
+            
+            # Additional CSV download option
+            with st.expander("📄 Additional Download Options"):
+                # Add creator info as comments in CSV
+                csv_data = mc_data.to_csv(index=False).encode('utf-8')
+                csv_link = get_download_link(csv_data, f"RAS_montecarlo_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv", "text/csv")
+                st.markdown(csv_link, unsafe_allow_html=True)
+                st.caption("Download Monte Carlo data as CSV file")
+            
         else:
             st.warning("No runs stabilized within the simulated window — try a longer window "
                        "or check parameter ranges.")
+
+# ------------------------------------------------------------------
+# Footer with copyright info displayed on the page
+# ------------------------------------------------------------------
+st.markdown("---")
+col_footer1, col_footer2, col_footer3 = st.columns([1, 2, 1])
+with col_footer2:
+    st.markdown("""
+    <div style='text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;'>
+        <p style='font-size: 14px; color: #666;'>
+            <strong>👨‍🔬 Created by Shreeram Ghimire</strong><br>
+            <span style='font-size: 12px;'>© 2026 Shreeram Ghimire. All Rights Reserved.</span><br>
+            <span style='font-size: 11px; color: #999;'>This software and its output are protected by copyright law.</span>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
