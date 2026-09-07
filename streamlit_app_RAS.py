@@ -27,13 +27,6 @@ from ras_stabilization_model import (
 
 st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
 
-st.sidebar.markdown("---")
-st.sidebar.markdown("** Creator:** Shreeram Ghimire")
-st.sidebar.markdown("** Version:** 1.0")
-st.sidebar.markdown("**© Copyright 2026**")
-st.sidebar.markdown("All rights reserved.")
-st.sidebar.markdown("---")
-
 st.title("RAS Stabilization Prediction Model")
 st.caption("Monod-kinetics biofilter cycling model with Monte Carlo uncertainty "
            "and Jacobian stability analysis.")
