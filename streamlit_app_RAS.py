@@ -12,7 +12,8 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.linalg import eigvals
 from dataclasses import dataclass
-from typing import Tupleimport streamlit as st
+from typing import Tuple
+import streamlit as st
 import matplotlib.pyplot as plt
 from ras_stabilization_model import (
     BaseConditions, run_simulation, find_stabilization_time,
