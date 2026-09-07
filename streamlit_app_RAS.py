@@ -294,7 +294,7 @@ with tab1:
     with st.expander("Eigenvalues (Jacobian at final state)"):
         st.write(eigvals)
 
-    t.markdown("---")
+    st.markdown("---")
     st.subheader("📊 Download Results")
     st.caption("All downloads include creator attribution and copyright information.")
     
