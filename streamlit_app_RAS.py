@@ -49,10 +49,10 @@ with st.expander(" Published kinetic parameter values (for calibration)"):
     | `mu_max_AOB` | 0.72 /day (range 0.45–0.72 depending on SRT) | WRRF titrimetric calibration |
     | `b_AOB` | 0.25 /day | Same WRRF calibration |
     | `Ks_NH3` | 0.4 mg N/L | Same WRRF calibration |
-    | `Y_AOB` / `mu_max_AOB` / `Ks_NH3` (upper bound) | 0.21 g COD/g N; ~2.16/day; 9.1 mg N/L | Enriched nitrifying granules (fast — upper bound) |
+    | `Y_AOB` / `mu_max_AOB` / `Ks_NH3` (upper bound) | 0.21 g COD/g N; ~2.16/day; 9.1 mg N/L | Enriched nitrifying granules (fast-upper bound) |
     | `Y_NOB` / `mu_max_NOB` / `Ks_NO2` (upper bound) | 0.05 g COD/g N; ~2.64/day; 4.85 mg N/L | Same granular sludge study |
  
-    These are calibration starting points, not drop-in defaults — RAS biofilm
+    These are calibration starting points, not drop-in defaults; RAS biofilm
     kinetics differ from activated sludge (diffusion limitation, lower ammonia
     levels, and *Nitrospira*/comammox often outnumbering classical
     *Nitrosomonas*/*Nitrobacter*). Full references are in the repo README.
