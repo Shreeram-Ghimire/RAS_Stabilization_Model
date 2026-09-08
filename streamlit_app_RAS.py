@@ -26,6 +26,30 @@ from ras_stabilization_model import (
 st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
 
 # ------------------------------------------------------------------
+# Session timeout: each visitor gets SESSION_TIMEOUT_MINUTES from the
+# moment they open the link. After that, the app stops rendering for
+# them and shows an expired message instead.
+# ------------------------------------------------------------------
+import time
+ 
+SESSION_TIMEOUT_MINUTES = 10
+ 
+if "session_start_time" not in st.session_state:
+    st.session_state.session_start_time = time.time()
+ 
+elapsed_minutes = (time.time() - st.session_state.session_start_time) / 60
+ 
+if elapsed_minutes > SESSION_TIMEOUT_MINUTES:
+    st.markdown(f"<h1 style='color:#E53935;'>Session Expired</h1>", unsafe_allow_html=True)
+    st.warning(
+        f"This session ended after {SESSION_TIMEOUT_MINUTES} minutes. "
+        "Please ask for a new link, or refresh the page to start a new session."
+    )
+    st.stop()
+else:
+    remaining = SESSION_TIMEOUT_MINUTES - elapsed_minutes
+    st.sidebar.info(f" Session expires in {remaining:.1f} min")
+# ------------------------------------------------------------------
 # Custom color scheme:
 #   - Sidebar headers, main title, tab labels -> blue
 #   - Slider fill/thumb/value -> blue (set via .streamlit/config.toml primaryColor)
