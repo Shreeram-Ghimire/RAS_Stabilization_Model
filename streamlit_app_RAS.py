@@ -23,7 +23,7 @@ from ras_stabilization_model import (
     is_stable, monte_carlo_run, sample_conditions
 )
 
-st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
+st.set_page_config(page_title="RAS Stabilization Prediction Model", layout="wide")
 
 # ------------------------------------------------------------------
 # Session timeout: each visitor gets SESSION_TIMEOUT_MINUTES from the
