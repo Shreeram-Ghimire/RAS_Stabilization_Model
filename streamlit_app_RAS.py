@@ -229,8 +229,7 @@ def create_dashboard_download(sol, t_stab, stable, eigvals, base_params, fig):
         <div class="container">
             <h1> RAS Stabilization Model - Dashboard</h1>
             
-            <div class="creator-info">
-                <strong> Created by:</strong> Shreeram Ghimire<br>
+            <div class="creator-info"
                 <strong> Generated on:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
             </div>
             
