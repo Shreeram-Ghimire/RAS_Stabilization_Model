@@ -55,7 +55,18 @@ with st.expander(" Published kinetic parameter values (for calibration)"):
     These are calibration starting points, not drop-in defaults; RAS biofilm
     kinetics differ from activated sludge (diffusion limitation, lower ammonia
     levels, and *Nitrospira*/comammox often outnumbering classical
-    *Nitrosomonas*/*Nitrobacter*). Full references are in the repo README.
+    *Nitrosomonas*/*Nitrobacter*). 
+    References:
+    Aichouche, M. (2021). *Mathematical Modeling of a Water Resource Recovery Facility.*
+
+    Fu, S., et al. (2015). *A preliminary stochastic model for managing microorganisms in a recirculating aquaculture system.* Annals of Microbiology.
+
+    Ririn, S., et al. (2018). *Stability Analysis of Mathematical Modeling of Pompano and Cantang Growth on Integrated Multi-Trophic Aquaculture Systems.*
+
+    Zhu, S., Chen, S. (1999). *An experimental study on nitrification biofilm performances using a series reactor system. Aquacultural Engineering, 20, 245–259.*
+
+    Zhu, S., Chen, S. (2002). *The impact of temperature on nitrification rate in fixed film biofilters. Aquacultural Engineering, 26, 221–237.*
+
     """)
  
 st.sidebar.header("Initial State")
