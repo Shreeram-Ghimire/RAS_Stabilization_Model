@@ -56,7 +56,9 @@ with st.expander(" Published kinetic parameter values (for calibration)"):
     kinetics differ from activated sludge (diffusion limitation, lower ammonia
     levels, and *Nitrospira*/comammox often outnumbering classical
     *Nitrosomonas*/*Nitrobacter*). 
+    
     References:
+    
     Aichouche, M. (2021). *Mathematical Modeling of a Water Resource Recovery Facility.*
 
     Fu, S., et al. (2015). *A preliminary stochastic model for managing microorganisms in a recirculating aquaculture system.* Annals of Microbiology.
