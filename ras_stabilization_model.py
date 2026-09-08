@@ -13,7 +13,7 @@ from scipy.integrate import solve_ivp
 from dataclasses import dataclass, field, asdict
 
 # ----------------------------------------------------------------------
-# 1. BASE CONDITIONS — this is your single configuration point
+# 1. BASE CONDITIONS (this is  single configuration point)
 # ----------------------------------------------------------------------
 # State vector order: [NH3, NO2, NO3, X_AOB, X_NOB]
 #   NH3, NO2, NO3   : mg/L (nitrogen species)
