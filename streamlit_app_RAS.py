@@ -34,6 +34,30 @@ st.caption("Monod-kinetics biofilter cycling model with Monte Carlo uncertainty 
 # ------------------------------------------------------------------
 # SIDEBAR — base conditions (mirrors the BaseConditions dataclass)
 # ------------------------------------------------------------------
+
+with st.expander(" Published kinetic parameter values (for calibration)"):
+    st.markdown("""
+    RAS-specific literature mostly reports empirical removal-rate equations rather
+    than a full Monod μ_max/Ks/Y set per organism, so most individual constants
+    below come from wastewater treatment (WRRF/activated sludge) studies on the
+    same organism physiology; the same approach used by Aichouche (2021).
+ 
+    | Parameter | Reported value | Source |
+    |---|---|---|
+    | RAS biofilter TAN removal (empirical) | R = 1859(S−0.07)/(S+1.93); min. TAN 0.07 mg/L at 27.2°C | Zhu & Chen (1999) |
+    | Regime threshold | Ammonia-limited below ~1 mg/L TAN; O2-limited above | Zhu & Chen (2002) |
+    | `mu_max_AOB` | 0.72 /day (range 0.45–0.72 depending on SRT) | WRRF titrimetric calibration |
+    | `b_AOB` | 0.25 /day | Same WRRF calibration |
+    | `Ks_NH3` | 0.4 mg N/L | Same WRRF calibration |
+    | `Y_AOB` / `mu_max_AOB` / `Ks_NH3` (upper bound) | 0.21 g COD/g N; ~2.16/day; 9.1 mg N/L | Enriched nitrifying granules (fast — upper bound) |
+    | `Y_NOB` / `mu_max_NOB` / `Ks_NO2` (upper bound) | 0.05 g COD/g N; ~2.64/day; 4.85 mg N/L | Same granular sludge study |
+ 
+    These are calibration starting points, not drop-in defaults — RAS biofilm
+    kinetics differ from activated sludge (diffusion limitation, lower ammonia
+    levels, and *Nitrospira*/comammox often outnumbering classical
+    *Nitrosomonas*/*Nitrobacter*). Full references are in the repo README.
+    """)
+ 
 st.sidebar.header("Initial State")
 NH3_0 = st.sidebar.number_input("Initial NH3 (mg/L)", 0.0, 50.0, 5.0, 0.5)
 NO2_0 = st.sidebar.number_input("Initial NO2 (mg/L)", 0.0, 50.0, 0.0, 0.5)
