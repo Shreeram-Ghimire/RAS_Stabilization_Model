@@ -32,7 +32,7 @@ st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
 # ------------------------------------------------------------------
 import time
  
-SESSION_TIMEOUT_MINUTES = 10
+SESSION_TIMEOUT_MINUTES = 1
  
 if "session_start_time" not in st.session_state:
     st.session_state.session_start_time = time.time()
