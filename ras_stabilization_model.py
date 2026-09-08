@@ -6,9 +6,6 @@ Aquaculture System (RAS) using:
   1. A Monod-kinetics ODE system (ammonia -> nitrite -> nitrate via AOB/NOB)
   2. Monte Carlo simulation over uncertain initial conditions / parameters
   3. Local stability analysis via the Jacobian's eigenvalues
-
-Designed to run in Jupyter (Kaggle). Everything you'd want to vary lives
-in BASE_CONDITIONS / PARAM_DISTRIBUTIONS below.
 """
 
 import numpy as np
