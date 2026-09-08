@@ -3,9 +3,7 @@ Streamlit front-end for the RAS Stabilization Prediction Model.
 
 Run locally with:
     pip install streamlit matplotlib
-    streamlit run streamlit_app.py
-
-Requires ras_stabilization_model.py in the same folder.
+    streamlit run streamlit_app_RAS.py
 """
 
 import streamlit as st
@@ -27,7 +25,42 @@ from ras_stabilization_model import (
 
 st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
 
-st.title("RAS Stabilization Prediction Model")
+# ------------------------------------------------------------------
+# Custom color scheme:
+#   - Sidebar headers, main title, tab labels -> blue
+#   - Slider fill/thumb/value -> blue (set via .streamlit/config.toml primaryColor)
+#   - Selected/active tab -> red (kept as the original default look)
+#   - References text -> red
+# ------------------------------------------------------------------
+PRIMARY_BLUE = "#1565C0"
+ACCENT_RED = "#E53935"
+
+st.markdown(f"""
+<style>
+/* Sidebar section headers (st.sidebar.header) */
+section[data-testid="stSidebar"] h2 {{
+    color: {PRIMARY_BLUE} !important;
+}}
+
+/* Tab labels: blue by default */
+[data-testid="stTabs"] button[data-baseweb="tab"] p {{
+    color: {PRIMARY_BLUE} !important;
+}}
+
+/* Selected tab: red text, matching the original look */
+[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"] p {{
+    color: {ACCENT_RED} !important;
+}}
+
+/* Selected tab underline indicator: red */
+[data-testid="stTabs"] [data-baseweb="tab-highlight"] {{
+    background-color: {ACCENT_RED} !important;
+}}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown(f"<h1 style='color:{PRIMARY_BLUE};'>RAS Stabilization Prediction Model</h1>",
+            unsafe_allow_html=True)
 st.caption("Monod-kinetics biofilter cycling model with Monte Carlo uncertainty "
            "and Jacobian stability analysis.")
 
@@ -55,22 +88,20 @@ with st.expander(" Published kinetic parameter values (for calibration)"):
     These are calibration starting points, not drop-in defaults; RAS biofilm
     kinetics differ from activated sludge (diffusion limitation, lower ammonia
     levels, and *Nitrospira*/comammox often outnumbering classical
-    *Nitrosomonas*/*Nitrobacter*). 
-    
-    References:
-    
-    Aichouche, M. (2021). *Mathematical Modeling of a Water Resource Recovery Facility.*
-
-    Fu, S., et al. (2015). *A preliminary stochastic model for managing microorganisms in a recirculating aquaculture system.* Annals of Microbiology.
-
-    Ririn, S., et al. (2018). *Stability Analysis of Mathematical Modeling of Pompano and Cantang Growth on Integrated Multi-Trophic Aquaculture Systems.*
-
-    Zhu, S., Chen, S. (1999). *An experimental study on nitrification biofilm performances using a series reactor system. Aquacultural Engineering, 20, 245–259.*
-
-    Zhu, S., Chen, S. (2002). *The impact of temperature on nitrification rate in fixed film biofilters. Aquacultural Engineering, 26, 221–237.*
-
+    *Nitrosomonas*/*Nitrobacter*).
     """)
- 
+
+    st.markdown(f"""
+    <div style='color: {ACCENT_RED};'>
+    <strong>References:</strong><br><br>
+    Aichouche, M. (2021). <em>Mathematical Modeling of a Water Resource Recovery Facility.</em><br><br>
+    Fu, S., et al. (2015). <em>A preliminary stochastic model for managing microorganisms in a recirculating aquaculture system.</em> Annals of Microbiology.<br><br>
+    Ririn, S., et al. (2018). <em>Stability Analysis of Mathematical Modeling of Pompano and Cantang Growth on Integrated Multi-Trophic Aquaculture Systems.</em><br><br>
+    Zhu, S., Chen, S. (1999). <em>An experimental study on nitrification biofilm performances using a series reactor system.</em> Aquacultural Engineering, 20, 245–259.<br><br>
+    Zhu, S., Chen, S. (2002). <em>The impact of temperature on nitrification rate in fixed film biofilters.</em> Aquacultural Engineering, 26, 221–237.
+    </div>
+    """, unsafe_allow_html=True)
+
 st.sidebar.header("Initial State")
 NH3_0 = st.sidebar.number_input("Initial NH3 (mg/L)", 0.0, 50.0, 5.0, 0.5)
 NO2_0 = st.sidebar.number_input("Initial NO2 (mg/L)", 0.0, 50.0, 0.0, 0.5)
