@@ -252,7 +252,7 @@ def fig_to_base64(fig):
 def get_download_link(data, filename, mime_type):
     """Generate a download link for the given data."""
     b64 = base64.b64encode(data).decode()
-    return f'<a href="data:{mime_type};base64,{b64}" download="{filename}" style="text-decoration: none; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; border: none; cursor: pointer; display: inline-block;">📥 Download {filename}</a>'
+    return f'<a href="data:{mime_type};base64,{b64}" download="{filename}" style="text-decoration: none; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; border: none; cursor: pointer; display: inline-block;"> Download {filename}</a>'
 
 # ------------------------------------------------------------------
 # MAIN — deterministic run
