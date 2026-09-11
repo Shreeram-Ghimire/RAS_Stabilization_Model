@@ -3,7 +3,7 @@ Streamlit front-end for the RAS Stabilization Prediction Model.
 
 Run locally with:
     pip install streamlit matplotlib
-    streamlit run streamlit_app_RAS.py
+    streamlit run streamlit_app_RAS.v1.py
 """
 
 import streamlit as st
@@ -23,7 +23,7 @@ from ras_stabilization_model import (
     is_stable, monte_carlo_run, sample_conditions
 )
 
-st.set_page_config(page_title="RAS Stabilization Model", layout="wide")
+st.set_page_config(page_title="RAS Stabilization Model.V1", layout="wide")
 
 # ------------------------------------------------------------------
 # Custom color scheme:
