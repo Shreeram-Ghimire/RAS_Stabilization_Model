@@ -18,7 +18,7 @@ from scipy.linalg import eigvals
 from dataclasses import dataclass
 from typing import Tuple
 
-from ras_stabilization_model import (
+from ras_stabilization_model_v1 import (
     BaseConditions, run_simulation, find_stabilization_time,
     is_stable, monte_carlo_run, sample_conditions
 )
