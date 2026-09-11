@@ -3,7 +3,7 @@ Streamlit front-end for the RAS Stabilization Prediction Model.
 
 Run locally with:
     pip install streamlit matplotlib
-    streamlit run streamlit_app_RAS.v1.py
+    streamlit run streamlit_app_RAS_v1.py
 """
 
 import streamlit as st
