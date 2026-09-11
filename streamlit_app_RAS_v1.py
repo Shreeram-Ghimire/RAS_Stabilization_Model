@@ -379,7 +379,7 @@ with tab2:
     if run_button:
         with st.spinner(f"Running {n_runs} simulations..."):
             # temporarily point the module's BASE at the sidebar-configured values
-            import ras_stabilization_model as ras_mod
+            import ras_stabilization_model_v1 as ras_mod
             ras_mod.BASE = base
             times, flags = monte_carlo_run(n_runs=n_runs, t_span=(0, t_max))
 
